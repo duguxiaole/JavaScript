@@ -12,8 +12,54 @@
 
     <div class="container">
 
+        <button class="el-button el-button-default is-round" onclick="handleVisit()"><span>属性访问</span></button>
+
+        <button class="el-button el-button-primary is-round" onclick="handleTraverse()">属性访问的另一种方式</button>
     </div>
 
 </body>
+<script>
+
+    function handleVisit() {
+        let person = {
+            name: "张三",
+            age: 18,
+            sex: "男",
+            address: "北京",
+            job: "前端工程师",
+            salary: 10000,
+            toString: function () {
+                return this.name + " " + this.age + " " + this.sex + " " + this.address + " " + this.job + " " + this.salary;
+            }
+        }
+        console.log(person.toString());
+    }
+
+    function handleTraverse() {
+        let obj = {
+            name: "张三",
+            age: 18,
+        };
+        /* for (let key in obj) {
+            console.log(key);
+            console.log(obj[key]);
+        } */
+
+        /* object.hasOwnProperty('属性名')，判断对象是否含有某个属性 */
+        // console.log(obj.hasOwnProperty('name'))
+
+        Object.defineProperty(obj, "msg", {
+            // 属性的初始值
+            value: "今天是个好天气",
+            // 属性是否可读写，默认为false，
+            //如果是false则为只读属性
+            writable: true,
+            // 属性是否可枚举(可遍历)，默认为false
+            enumerable: true,
+        });
+
+        console.log(obj.msg);
+    }
+</script>
 
 </html>
