@@ -15,12 +15,14 @@
     let person = {
         introduce(address, job) {
             console.log(`我叫${this.name},今年${this.age}岁了.现居住在${address},工作是${job}`);
-        }
+            console.log(this.height);
+        },
     }
 
     let zhang = {
         name: "张三",
-        age: '18'
+        age: '18',
+        height: 180,
     }
 
     let wang = {
