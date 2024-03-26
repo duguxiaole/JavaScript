@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节流</title>
+    <style>
+        #content {
+            height: 150px;
+            line-height: 150px;
+            text-align: center;
+            color: #fff;
+            background-color: #ccc;
+            font-size: 80px;
+            margin: 20px;
+        }
+
+        #content2 {
+            margin: 0 auto;
+            height: 300px;
+            width: 100px;
+            overflow: auto;
+            background: #EEEEEE;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 例子1 -->
+    <div id="content"></div>
+    <script>
+        let num = 1;
+        let content = document.getElementById("content");
+
+        function count() {
+            content.innerHTML = num++;
+        }
+        content.onmousemove = count;
+
+        function throttle(func, wait) {
+            let timeout;
+            return function () {
+                let that = this;
+                // let args = arguments;
+                // 设置一个定时器，只有为空时才会触发，每次执行后都会重新设定一个定时器。
+                if (!timeout) {
+                    timeout = setTimeout(() => {
+                        timeout = null;
+                        func.apply(that)
+                    }, wait)
+                }
+            }
+        }
+        content.onmousemove = throttle(count, 1000);
+    </script>
+
+    <!-- 例子2 -->
+    <div id="content2">
+        菜鸟教程 -- 学的不仅是技术，更是梦想！！！
+        菜鸟教程 -- 学的不仅是技术，更是梦想！！！
+        菜鸟教程 -- 学的不仅是技术，更是梦想！！！
+        菜鸟教程 -- 学的不仅是技术，更是梦想！！！
+        菜鸟教程 -- 学的不仅是技术，更是梦想！！！
+        菜鸟教程 -- 学的不仅是技术，更是梦想！！！
+        菜鸟教程 -- 学的不仅是技术，更是梦想！！！
+        菜鸟教程 -- 学的不仅是技术，更是梦想！！！
+        菜鸟教程 -- 学的不仅是技术，更是梦想！！！
+        菜鸟教程 -- 学的不仅是技术，更是梦想！！！
+        菜鸟教程 -- 学的不仅是技术，更是梦想！！！
+        菜鸟教程 -- 学的不仅是技术，更是梦想！！！
+    </div>
+
+</body>
+<script>
+    let num2 = 1;
+    let content2 = document.getElementById("content2");
+    function handleView() {
+        // content2.innerHTML = num2++;
+        console.log('第' + num2++ + '次触发节流');
+    }
+    content2.onmousemove = handleView;
+
+    function throttle(cont2, wait) {
+        let timeout;
+        return function () {
+            if (!timeout) {
+                timeout = setTimeout(() => {
+                    timeout = null;
+                    cont2.apply(this);
+                }, wait)
+            }
+        }
+    }
+    content2.onmousemove = throttle(handleView, 1000);
+</script>
+
+</html>

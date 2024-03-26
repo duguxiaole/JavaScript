@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #content {
+            margin: 0 auto;
+            width: 200px;
+            height: 150px;
+            line-height: 150px;
+            text-align: center;
+            color: #fff;
+            background-color: #ccc;
+            font-size: 80px;
+        }
+
+        .input {
+            margin: 20px;
+        }
+
+        #result {
+            height: 150px;
+            line-height: 150px;
+            text-align: center;
+            color: #081ee6e5;
+            background-color: #cccccc;
+            font-size: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 例子1 -->
+    <div id="content"></div>
+    <script>
+        let num = 1; // 模拟数据
+        let content = document.getElementById("content"); // 获取元素
+        // 此处为高频调用函数
+        function count() { // 模拟函数
+            content.innerHTML = num++; // 模拟数据
+        }
+        content.onmousemove = count; // 绑定事件
+
+        function debounce(func, wait) {
+            let timeout; // 定义一个变量
+            return function () {
+                // let args = arguments; // 获取参数
+                // console.log(args);
+
+                if (timeout) clearTimeout(timeout); // 如果已经设定过定时器就清空上一次的定时器
+
+                timeout = setTimeout(() => {    // 定时器
+                    func.apply(this); // 将当前函数绑定到定时器事件触发时执行的函数
+                }, wait);   // 延迟执行函数
+            };
+        }
+        content.onmousemove = debounce(count, 1000);    // 1秒后执行    
+    </script>
+
+
+    <!-- 例子2 -->
+    <div class="input">文本内容
+        <input type="text" oninput="handleInput()" id="input">
+    </div>
+    <div id="result"></div>
+    <script>
+        let inputVal = '';
+        function handleInput() {
+            inputVal = document.getElementById("input").value;
+            // console.log(inputVal)
+
+            let resultVal = document.getElementById("result");
+            resultVal.innerHTML = inputVal;
+        }
+
+        // 自己写的
+        function debounce(cont, wait) {
+            let timeout = null;
+            return function () {
+                if (timeout) {
+                    clearTimeout(timeout);
+                }
+                timeout = setTimeout(() => {
+                    cont.apply(this);
+                }, wait)
+            }
+        }
+        document.getElementById("input").oninput = debounce(handleInput, 1000);
+
+    </script>
+</body>
+
+</html>
