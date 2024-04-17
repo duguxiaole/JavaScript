@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>递归</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /**
+     * 例子1
+     * 写一个阶乘
+    */
+    function factorial(n) {
+        // 基本情况
+        if (n === 0 || n === 1) {
+            return 1;
+        }
+        // 递归调用
+        else {
+            return n * factorial(n - 1);
+        }
+    }
+    // console.log(factorial(5));  //120
+
+
+
+    /**
+     * 例子2
+     * 1到5之和
+    */
+    function add5(num) {
+        // console.log(num)
+        // 结束条件
+        if (num == 1) {
+            return 1;
+        } else {
+            // console.log(num)
+            return num + add5(num - 1)
+        }
+    }
+    let val = add5(5)
+    // console.log(val)
+
+
+    /**
+     * 例子3
+     * 
+    */
+    function head(n) {
+        if (n == 0) {
+            return 0
+        }
+        head(n - 1)
+        console.log(n);
+    }
+    // head(5)
+
+    function tail(n) {
+        if (n == 0) {
+            return 0
+        }
+        console.log(n);
+        tail(n - 1)
+    }
+    tail(5)  //5 4 3 2 1
+
+</script>
+
+</html>
